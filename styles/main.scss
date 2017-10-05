@@ -1,0 +1,440 @@
+$icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
+// bower:scss
+@import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
+// endbower
+
+
+.browsehappy {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
+}
+
+.navbar-brand {
+  position: left;
+
+}
+
+body {
+  padding: 0;
+}
+
+/* Everything but the jumbotron gets side spacing for mobile first views */
+.header,
+.marketing,
+.footer {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/* Custom page header */
+.header {
+  /*border-bottom: 1px solid #e5e5e5;*/
+
+  /* Make the masthead heading the same height as the navigation */
+  h3 {
+    margin-top: 0;
+    margin-bottom: 0;
+    line-height: 40px;
+  }
+}
+
+.navbar-header {
+  border-bottom: none;
+}
+/* Custom page footer */
+.footer {
+  margin-top: 50px;
+  padding-top: 19px;
+  color: #777;
+  border-top: 1px solid #e5e5e5;
+}
+
+.container-narrow > hr {
+  margin: 30px 0;
+}
+
+/* Main marketing message and sign up button */
+.jumbotron {
+  text-align: center;
+  border-bottom: 1px solid #e5e5e5;
+
+  .btn {
+    font-size: 21px;
+    padding: 14px 24px;
+  }
+}
+
+/* Supporting marketing content */
+.marketing {
+  margin: 40px 0;
+
+  p + h4 {
+    margin-top: 28px;
+  }
+}
+
+.search {
+  margin-left: 270px;
+  margin-right: 250px;
+  margin-bottom: 50px;
+  color: #6B6B6B;
+  border-bottom: 1px solid #e5e5e5;
+  padding: 10px;
+  background:  #e5e5e5;
+}
+
+.right {
+  float:right;
+}
+
+.title {
+  font-size: 20pt;
+  margin: 10px;
+  color: #6B6B6B;
+  margin-right: 30px;
+  letter-spacing: 4px;
+}
+
+
+a:hover {
+  text-decoration: none;
+}
+
+
+.vertnav {
+  /*padding: 2px;*/
+  opacity: 0.3;
+  margin-top: 15px;
+  margin-right: 5px;
+  position: center;
+
+}
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+  .container {
+    max-width: 930px;
+  }
+
+  /* Remove the padding we set earlier */
+  .header,
+  .marketing,
+  .footer {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  /* Space out the masthead */
+  .header {
+    margin-bottom: 30px;
+  }
+  /* Remove the bottom border on the jumbotron for visual effect */
+  .jumbotron {
+    border-bottom: 0;
+  }
+}
+
+
+@import "compass/css3";
+
+@import url("http://fonts.googleapis.com/css?family=Lato:300,400,700,900");
+@import url(http://fonts.googleapis.com/css?family=Pacifico);
+
+body {
+  font-family: "Lato", Helvetica, Arial;
+  font-size: 16px;
+}
+
+*, *:before, *:after {
+  -webkit-border-sizing: border-box;
+  -moz-border-sizing: border-box;
+  border-sizing: border-box;
+}
+
+/*.container {
+  width: 350px;
+  margin: 50px auto;
+  
+  & > ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 20px 0;
+  }
+}
+*/
+// =============================================================================
+//  Mixins and Variables
+// =============================================================================
+
+$blue: #2980B9;
+$gray: #EEE;
+
+@mixin ul-nostyle {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+@mixin double-shadow($color) {
+  @include box-shadow(0 1px 0 lighten($color, 10%) inset, 0 -1px 0 darken($color, 10%) inset);
+}
+
+@mixin hover-style($color) {
+  &:hover {
+    background: lighten($color, 3%);
+  }
+}
+
+@mixin animation($content) {
+  animation: $content;
+  -moz-animation: $content;
+  -webkit-animation: $content;
+}
+
+@mixin keyframes($name) {
+  @keyframes #{$name} { @content; }
+  @-moz-keyframes #{$name} { @content; }
+  @-webkit-keyframes #{$name} { @content; }
+}
+
+// =============================================================================
+//  Classes
+// =============================================================================
+
+.dropdown {
+  a {
+    text-decoration: none;
+  }
+
+  [data-toggle="dropdown"] {
+    position: relative;
+    display: block;
+    color: white;
+    padding: 5px;
+    width: 50px;
+  }
+
+  .dropdown-menu {
+    max-height: 0;
+    overflow: hidden;
+    @include ul-nostyle;
+
+    li {
+      padding: 0;
+
+      a {
+        display: block;
+        color: darken($gray, 50%);
+        background: $gray;
+        @include double-shadow($gray);
+        @include hover-style($gray);
+        @include text-shadow(0 -1px 0 rgba(255,255,255,0.3));
+        padding: 10px 10px;
+      }
+    }
+  }
+
+  .show, .hide {
+    @include transform-origin(50%, 0%);
+  }
+
+  .show {
+    display: block;
+    max-height: 9999px;
+    @include transform(scaleY(1));
+    @include animation(showAnimation .5s ease-in-out);
+    @include transition(max-height 1s ease-in-out);
+  }
+
+  .hide {
+    max-height: 0;
+    @include transform(scaleY(0));
+    @include animation(hideAnimation .4s ease-out);
+    @include transition(max-height .6s ease-out);
+  }
+}
+
+@include keyframes(showAnimation) {
+  0% {
+    @include transform(scaleY(0.1));
+  }
+  40% {
+    @include transform(scaleY(1.04));
+  }
+  60% {
+    @include transform(scaleY(0.98));
+  }
+  80% {
+    @include transform(scaleY(1.04));
+  }
+  100% {
+    @include transform(scaleY(0.98));
+  }       
+  80% {
+    @include transform(scaleY(1.02));
+  }
+  100% {
+    @include transform(scaleY(1));
+  }
+}
+
+@include keyframes(hideAnimation) {
+  0% {
+    @include transform(scaleY(1));
+  }
+  60% {
+    @include transform(scaleY(0.98));
+  }
+  80% {
+    @include transform(scaleY(1.02));
+  }
+  100% {
+    @include transform(scaleY(0));
+  }
+}
+
+
+.feed {
+
+    float: left;
+
+}
+
+
+.side_bar {
+
+    float: right;
+
+}
+
+
+.add_content_button {
+
+    font-size: 20px;
+
+    background: #000000;
+
+    color: #ffffff;
+
+    padding-top: 5px;
+
+    padding-left: 20px;
+
+    padding-bottom: 5px;
+
+    padding-right: 20px;
+
+    border-radius: 32px;
+
+}
+
+
+
+.prof_summary {
+
+    border: groove;
+
+    height: 150px;
+
+}
+
+
+.bubble_photo {
+
+    max-width: 100px;
+
+    max-height: 100px;
+
+    border-radius: 100000px;
+
+}
+
+
+.prof_photo {
+
+    padding-top: 25px;
+
+    padding-left: 10px;
+
+    padding-right: 20px;
+    float:left;
+
+}
+
+
+.prof_text {
+
+    float: left;
+
+}
+
+
+.prof_button {
+
+    padding-top: 40px;
+
+    padding-left: 10px;
+
+    padding-right: 20px;
+
+    float:right;
+
+}
+
+
+.btn {
+
+    max-width: 60px;
+
+    max-height: 60px;
+
+    border-radius: 100000px;
+
+    font-size: 20px;
+
+    background: #00b800;
+
+    color: #ffffff;
+
+    padding-top: 5px;
+
+    padding-bottom: 5px;
+
+    padding-left: 20px;
+
+    padding-right: 20px;
+
+}
+
+
+.btn:hover {
+
+    background: #000000
+
+}
+
+
+.feed-candidate {
+    border:groove;
+    height: 150px;
+}
+
+
+.feed_photo {
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 20px;
+    float:left;
+}
+
+.feed_text {
+    float: left;
+    padding-top: 20px;
+}
+
+
+.feed_item {
+
+}
+
+
